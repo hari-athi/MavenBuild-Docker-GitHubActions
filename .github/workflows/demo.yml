@@ -1,0 +1,19 @@
+name: "Java package action"
+on:
+  push:
+    branches:
+      - master
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup java and maven
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Packaging
+        run: mvn clean install package
